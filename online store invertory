@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Product {
+public:
+    string name, id, supplier;
+    double price;
+    int stock;
+
+    void get() {
+        cout << "Name ID Price Stock Supplier: ";
+        getline(cin >> ws, name); getline(cin >> ws, id); 
+        cin >> price >> stock; getline(cin >> ws, supplier);
+    }
+
+    void display() {
+        cout << name << " " << id << " $" << price << " Stock: " << stock << " " << supplier << endl;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Num products: ";
+    cin >> n;
+
+    vector<Product> inv(n);
+    for (auto& p : inv) p.get();
+
+    double total = 0;
+    for (const auto& p : inv) total += p.price * p.stock;
+    cout << "Total: $" << total << endl;
+
+    cout << "Restock:\n";
+    for (const auto& p : inv)
+        if (p.stock < 10) p.display ();
+
+return 0;
+}
